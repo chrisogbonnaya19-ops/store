@@ -1,24 +1,68 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Header } from "@/components/blend/Header";
+import { StoreProvider } from "@/components/blend/store";
+import {
+  About,
+  Categories,
+  Contact,
+  Deals,
+  Faq,
+  Footer,
+  Hero,
+  Newsletter,
+  NewArrivals,
+  Reviews,
+  Shop,
+  WhatsAppButton,
+} from "@/components/blend/Sections";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const TITLE = "Blend Supermarket | Online Grocery Shopping in Lagos";
+const DESCRIPTION =
+  "Shop groceries, beverages, frozen foods, toiletries and more at Blend Supermarket, Okokomaiko Lagos. Naira prices, secure checkout and same-day delivery.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("All");
+
+  const pickCategory = (value: string) => {
+    setCategory(value);
+    document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <StoreProvider>
+      <div className="min-h-screen bg-background">
+        <Header query={query} onQuery={setQuery} />
+        <main>
+          <Hero />
+          <Categories onPick={pickCategory} />
+          <Shop query={query} category={category} onCategory={setCategory} />
+          <Deals />
+          <NewArrivals />
+          <Reviews />
+          <About />
+          <Contact />
+          <Faq />
+          <Newsletter />
+        </main>
+        <Footer />
+        <WhatsAppButton />
+      </div>
+    </StoreProvider>
   );
 }
