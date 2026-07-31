@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/accordion";
 import { BUSINESS, CATEGORIES, FAQS, PRODUCTS, REVIEWS } from "@/data/blend";
 import { ProductCard } from "./ProductCard";
+import { categoryIcon } from "./icons";
 import hero from "@/assets/hero-shopper.jpg";
 import logo from "@/assets/blend-logo.png";
 
@@ -137,19 +138,22 @@ export function Categories({ onPick }: { onPick: (category: string) => void }) {
         sub="Eight carefully stocked aisles, from fresh groceries to home electronics."
       />
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {CATEGORIES.map((c) => (
-          <button
-            key={c.name}
-            onClick={() => onPick(c.name)}
-            className="card-lift flex flex-col items-start gap-2 rounded-2xl border border-border bg-card p-5 text-left shadow-card"
-          >
-            <span className="grid h-12 w-12 place-items-center rounded-xl bg-secondary text-2xl">
-              {c.emoji}
-            </span>
-            <span className="font-semibold">{c.name}</span>
-            <span className="text-xs text-muted-foreground">{c.items} products</span>
-          </button>
-        ))}
+        {CATEGORIES.map((c) => {
+          const Icon = categoryIcon(c.name);
+          return (
+            <button
+              key={c.name}
+              onClick={() => onPick(c.name)}
+              className="card-lift flex flex-col items-start gap-2 rounded-2xl border border-border bg-card p-5 text-left shadow-card"
+            >
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-secondary text-primary">
+                <Icon className="h-6 w-6" />
+              </span>
+              <span className="font-semibold">{c.name}</span>
+              <span className="text-xs text-muted-foreground">{c.items} products</span>
+            </button>
+          );
+        })}
       </div>
     </section>
   );

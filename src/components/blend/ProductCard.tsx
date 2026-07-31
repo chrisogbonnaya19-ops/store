@@ -3,15 +3,17 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { naira, type Product } from "@/data/blend";
 import { useStore } from "./store";
+import { categoryIcon } from "./icons";
 
 export function ProductCard({ product }: { product: Product }) {
   const { add, toggleWish, wishlist } = useStore();
   const wished = wishlist.includes(product.id);
+  const Icon = categoryIcon(product.category);
 
   return (
     <article className="card-lift group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card">
-      <div className="relative grid aspect-4/3 place-items-center bg-secondary/60 text-6xl">
-        <span aria-hidden="true">{product.emoji}</span>
+      <div className="relative grid aspect-4/3 place-items-center bg-secondary/60">
+        <Icon className="h-14 w-14 text-primary/70" strokeWidth={1.2} aria-hidden="true" />
         {product.tag === "deal" && (
           <span className="bg-gold-gradient text-gold-foreground absolute top-3 left-3 rounded-full px-2.5 py-1 text-[0.7rem] font-bold">
             Deal
