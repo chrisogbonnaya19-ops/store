@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { naira } from "@/data/blend";
 import { useStore } from "./store";
+import { categoryIcon } from "./icons";
 
 export function CartSheet({ children }: { children: ReactNode }) {
   const { cart, total, setQty, remove, clear } = useStore();
@@ -37,8 +38,8 @@ export function CartSheet({ children }: { children: ReactNode }) {
               key={line.product.id}
               className="flex items-center gap-3 rounded-xl border border-border bg-card p-3"
             >
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-secondary text-2xl">
-                {line.product.emoji}
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-secondary text-primary">
+                {(() => { const I = categoryIcon(line.product.category); return <I className="h-5 w-5" />; })()}
               </span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-semibold">{line.product.name}</p>
