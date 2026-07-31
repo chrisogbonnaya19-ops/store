@@ -95,6 +95,12 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --gold: oklch(0.78 0.13 85);
+  --gold-foreground: oklch(0.25 0.05 80);
+  --gradient-hero: linear-gradient(135deg, oklch(0.42 0.12 152), oklch(0.56 0.14 150));
+  --gradient-gold: linear-gradient(120deg, oklch(0.86 0.11 90), oklch(0.72 0.14 78));
+  --shadow-card: 0 10px 30px -18px oklch(0.4 0.1 152 / 0.45);
+  --shadow-lift: 0 22px 45px -22px oklch(0.4 0.1 152 / 0.55);
 }
 
 .dark {
